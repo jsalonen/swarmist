@@ -1,10 +1,10 @@
-# swarmist
+# warmist
 
 Experimental GUI and tools for Docker Swarm Mode
 
-## Running against remove swarm
+## Running Against Remote Swarm
 
-Create SSH tunnel:
+Create an SSH tunnel to manager node:
 
 	ssh -NL localhost:2375:/var/run/docker.sock user@example.com
 

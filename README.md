@@ -1,4 +1,4 @@
-# warmist
+# Swarmist
 
 Experimental GUI and tools for Docker Swarm Mode
 

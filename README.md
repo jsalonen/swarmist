@@ -2,11 +2,13 @@
 
 Experimental GUI and tools for Docker Swarm Mode
 
-## Running Locally
+## Running
 
-	docker run -it -v /var/run/docker.sock:/var/run/docker.sock -p 3000:3000 swarmist
+### Locally
 
-## Running Against Remote Swarm
+	docker run -it -v /var/run/docker.sock:/var/run/docker.sock -p 3000:3000 jsalonen/swarmist
+
+### Against Remote Swarm
 
 Create an SSH tunnel to manager node:
 
@@ -15,3 +17,7 @@ Create an SSH tunnel to manager node:
 Start swarmist and connect to tunneled port:
 
 	SWARMIST_DOCKER_URI=http://localhost:2375 npm start
+
+## TODO
+
+- [ ] Display connection error 

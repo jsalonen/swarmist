@@ -7,7 +7,7 @@ class ServiceUpdateStatus extends Component {
       return (
         <span>
           <CircularProgress size={14} thickness={2} /> &nbsp;
-          Updating
+          {this.props.state || ''}
         </span>
       );
     } else {

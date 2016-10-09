@@ -12,6 +12,9 @@ var docker = new Docker(dockerOpts);
 var express = require('express');
 var app = express();
 
+// Cache
+app.locals.tasks = [];
+
 app.get('/api', (req, res) => {
   res.send('API');
 });
@@ -31,6 +34,17 @@ app.get('/api/services', (req, res) => {
     if(err) {
       return res.status(500).send(err);
     } else {
+      services.map((service) => {
+        const replicasRunning = app.locals.tasks.filter((task) => {
+          return (task.ServiceID === service.ID) && (task.Status.State === 'running');
+        }).length;
+
+        service._Swarmist = {
+          ReplicasRunning: replicasRunning
+        };
+        return service;
+      })
+
       return res.json(services);
     }
   });
@@ -52,6 +66,7 @@ app.get('/api/tasks', (req, res) => {
     if(err) {
       return res.status(500).send(err);
     } else {
+      app.locals.tasks = tasks;
       return res.json(tasks);
     }
   });

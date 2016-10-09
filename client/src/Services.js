@@ -3,6 +3,7 @@ import Subheader from 'material-ui/Subheader';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import IdField from './IdField';
 import ServiceUpdateStatus from './ServiceUpdateStatus';
+import ServiceReplicaStatus from './ServiceReplicaStatus';
 
 class Services extends Component {
   constructor(props) {
@@ -73,7 +74,9 @@ class Services extends Component {
                     ))}
                   </TableRowColumn>
                   <TableRowColumn>
-                    {service.Spec.Mode.Replicated.Replicas}
+                    <ServiceReplicaStatus
+                      replicas={service.Spec.Mode.Replicated.Replicas}
+                      replicasRunning={service._Swarmist.ReplicasRunning} />
                   </TableRowColumn>
                   <TableRowColumn>
                     <ServiceUpdateStatus state={service.UpdateStatus.State} />

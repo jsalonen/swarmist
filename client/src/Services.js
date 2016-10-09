@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Subheader from 'material-ui/Subheader';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import IdField from './IdField';
+import ServiceUpdateStatus from './ServiceUpdateStatus';
 
 class Services extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Services extends Component {
     };
   }
 
-  componentDidMount() {
+  loadServices() {
     fetch('/api/services/', {
       accept: 'application/json'
     })
@@ -26,6 +27,11 @@ class Services extends Component {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  componentDidMount() {
+    this.loadServices();
+    setInterval(this.loadServices.bind(this), 1000);
   }
 
   onRowSelection(rows) {
@@ -51,6 +57,7 @@ class Services extends Component {
                 <TableHeaderColumn>Image</TableHeaderColumn>
                 <TableHeaderColumn>Ports</TableHeaderColumn>
                 <TableHeaderColumn>Replicas</TableHeaderColumn>
+                <TableHeaderColumn>Update status</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
@@ -65,7 +72,12 @@ class Services extends Component {
                       <span key={index}>{port.Protocol} {port.PublishedPort}:{port.TargetPort}<br /></span>
                     ))}
                   </TableRowColumn>
-                  <TableRowColumn>{service.Spec.Mode.Replicated.Replicas}</TableRowColumn>
+                  <TableRowColumn>
+                    {service.Spec.Mode.Replicated.Replicas}
+                  </TableRowColumn>
+                  <TableRowColumn>
+                    <ServiceUpdateStatus state={service.UpdateStatus.State} />
+                  </TableRowColumn>
                 </TableRow>
               ))}
             </TableBody>

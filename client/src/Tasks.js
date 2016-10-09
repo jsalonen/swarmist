@@ -34,7 +34,6 @@ class Tasks extends Component {
   }
 
   render() {
-    let tasksElem;
     if(!this.state.tasks || !this.state.tasks.length || !this.props.selectedServices.length) {
       return (<div>
         <hr/>

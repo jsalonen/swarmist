@@ -54,7 +54,7 @@ class Services extends Component {
                   <TableRowColumn>{service.Spec.TaskTemplate.ContainerSpec.Image}</TableRowColumn>
                   <TableRowColumn>
                     {service.Endpoint.Ports.map((port, index) => (
-                      <span key={index}>{port.Protocol} {port.TargetPort}:{port.PublishedPort}<br /></span>
+                      <span key={index}>{port.Protocol} {port.PublishedPort}:{port.TargetPort}<br /></span>
                     ))}
                   </TableRowColumn>
                   <TableRowColumn>{service.Spec.Mode.Replicated.Replicas}</TableRowColumn>

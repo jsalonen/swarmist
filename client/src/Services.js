@@ -28,6 +28,12 @@ class Services extends Component {
       });
   }
 
+  onRowSelection(rows) {
+    this.props.onSelection(rows.map((index) => {
+      return this.state.services[index].ID;
+    }));
+  }
+
   render() {
     var services;
     if(!this.state.services || !this.state.services.length) {
@@ -36,7 +42,9 @@ class Services extends Component {
       services =
         <div>
           <Subheader>Services</Subheader>
-          <Table selectable={false}>
+          <Table selectable={true}
+           multiSelectable={false}
+           onRowSelection={this.onRowSelection.bind(this)}>
             <TableHeader>
               <TableRow>
                 <TableHeaderColumn>ID</TableHeaderColumn>
@@ -47,7 +55,7 @@ class Services extends Component {
             </TableHeader>
             <TableBody>
               {this.state.services.map((service, index) => (
-                <TableRow key={index}>
+                <TableRow key={index} selected={this.props.selectedServices.indexOf(service.ID) !== -1}>
                   <TableRowColumn>
                     {service.Spec.Name} (<IdField value={service.ID}></IdField>)
                   </TableRowColumn>

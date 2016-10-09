@@ -5,13 +5,31 @@ import Services from './Services.js';
 import Tasks from './Tasks.js';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedServices: []
+    };
+  }
+
+  onServiceSelection(selectedServices) {
+    this.setState({
+      selectedServices: selectedServices
+    });
+  }
+
   render() {
     return (
       <MuiThemeProvider>
         <div className="App">
           <AppBar title="Swarmist" />
-          <Services />
-          <Tasks />
+          <Services
+           onSelection={this.onServiceSelection.bind(this)}
+           selectedServices={this.state.selectedServices}/>
+
+          <div className='tasks'>
+            <Tasks selectedServices={this.state.selectedServices}/>
+          </div>
         </div>
       </MuiThemeProvider>
     );

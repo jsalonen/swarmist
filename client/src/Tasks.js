@@ -34,15 +34,21 @@ class Tasks extends Component {
   }
 
   render() {
-    var tasks;
+    let tasksElem;
     if(!this.state.tasks || !this.state.tasks.length) {
-      tasks = <p/>
+      return <p/>
     } else {
-      tasks =
+      const filteredTasks =
+        this.state.tasks.filter((task) => 
+          !this.props.selectedServices.length ||
+          this.props.selectedServices.indexOf(task.ServiceID) !== -1
+        );
+
+      return (
         <div>
           <Subheader>Tasks</Subheader>
           <Table selectable={false}>
-            <TableHeader>
+            <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
               <TableRow>
                 <TableHeaderColumn>ID</TableHeaderColumn>
                 <TableHeaderColumn>Image</TableHeaderColumn>
@@ -50,8 +56,8 @@ class Tasks extends Component {
                 <TableHeaderColumn>State</TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            <TableBody>
-              {this.state.tasks.map((task, index) => (
+            <TableBody displayRowCheckbox={false}>
+              {filteredTasks.map((task, index) => (
                 <TableRow key={index}>
                   <TableRowColumn><IdField value={task.ID}></IdField></TableRowColumn>
                   <TableRowColumn>{task.Spec.ContainerSpec.Image}</TableRowColumn>
@@ -62,13 +68,8 @@ class Tasks extends Component {
             </TableBody>
           </Table>
         </div>
+      );
     }
-
-    return (
-      <div className='tasks'>
-        {tasks}
-      </div>
-    );
   }
 }
 

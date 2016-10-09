@@ -56,7 +56,7 @@ class Tasks extends Component {
                   <TableRowColumn><IdField value={task.ID}></IdField></TableRowColumn>
                   <TableRowColumn>{task.Spec.ContainerSpec.Image}</TableRowColumn>
                   <TableRowColumn>{task.Status.Message}</TableRowColumn>
-                  <TableRowColumn>{task.Status.State}</TableRowColumn>
+                  <TableRowColumn>{task.Status.State}<br/>{task.Status.Err}</TableRowColumn>
                 </TableRow>
               ))}
             </TableBody>

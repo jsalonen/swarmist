@@ -47,13 +47,12 @@ app.get('/api/services/:id', (req, res) => {
   });
 });
 
-
 app.get('/api/tasks', (req, res) => {
   docker.listTasks((err, tasks) => {
     if(err) {
       return res.status(500).send(err);
     } else {
-    return res.json(tasks);
+      return res.json(tasks);
     }
   });
 });

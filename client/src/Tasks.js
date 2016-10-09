@@ -53,17 +53,19 @@ class Tasks extends Component {
               <TableRow>
                 <TableHeaderColumn>ID</TableHeaderColumn>
                 <TableHeaderColumn>Image</TableHeaderColumn>
-                <TableHeaderColumn>Message</TableHeaderColumn>
-                <TableHeaderColumn>State</TableHeaderColumn>
+                <TableHeaderColumn>Desired state</TableHeaderColumn>
+                <TableHeaderColumn>Current state</TableHeaderColumn>
+                <TableHeaderColumn>Error</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
               {filteredTasks.map((task, index) => (
                 <TableRow key={index}>
-                  <TableRowColumn>&nbsp;&nbsp;&mdash;&nbsp;<IdField value={task.ID}></IdField></TableRowColumn>
+                  <TableRowColumn><IdField value={task.ID}></IdField></TableRowColumn>
                   <TableRowColumn>{task.Spec.ContainerSpec.Image}</TableRowColumn>
-                  <TableRowColumn>{task.Status.Message}</TableRowColumn>
-                  <TableRowColumn>{task.Status.State}<br/>{task.Status.Err}</TableRowColumn>
+                  <TableRowColumn>{task.DesiredState}</TableRowColumn>
+                  <TableRowColumn>{task.Status.State}</TableRowColumn>
+                  <TableRowColumn>{task.Status.Err}</TableRowColumn>
                 </TableRow>
               ))}
             </TableBody>

@@ -20,7 +20,9 @@ class Tasks extends Component {
       })
       .then((tasks) => {
         this.setState({
-          tasks: tasks
+          tasks: tasks.filter((task) => 
+            task.DesiredState !== 'shutdown' || task.Status.State !== 'shutdown'
+          )
         });
       })
       .catch((error) => {

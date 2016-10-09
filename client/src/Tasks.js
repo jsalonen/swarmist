@@ -19,6 +19,16 @@ class Tasks extends Component {
         return response.json();
       })
       .then((tasks) => {
+        tasks.sort((a, b) => {
+          if(a.UpdatedAt > b.UpdatedAt) {
+            return -1;
+          }
+          if(a.UpdatedAt < b.UpdatedAt) {
+            return 1;
+          }
+          return 0;
+        });
+
         this.setState({
           tasks: tasks.filter((task) => 
             task.DesiredState !== 'shutdown' || task.Status.State !== 'shutdown'

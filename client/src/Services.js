@@ -45,7 +45,7 @@ class Services extends Component {
           <Table selectable={true}
            multiSelectable={false}
            onRowSelection={this.onRowSelection.bind(this)}>
-            <TableHeader>
+            <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
               <TableRow>
                 <TableHeaderColumn>ID</TableHeaderColumn>
                 <TableHeaderColumn>Image</TableHeaderColumn>
@@ -53,7 +53,7 @@ class Services extends Component {
                 <TableHeaderColumn>Replicas</TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            <TableBody>
+            <TableBody displayRowCheckbox={false}>
               {this.state.services.map((service, index) => (
                 <TableRow key={index} selected={this.props.selectedServices.indexOf(service.ID) !== -1}>
                   <TableRowColumn>

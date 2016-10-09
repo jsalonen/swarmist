@@ -26,10 +26,7 @@ class App extends Component {
           <Services
            onSelection={this.onServiceSelection.bind(this)}
            selectedServices={this.state.selectedServices}/>
-
-          <div className='tasks'>
-            <Tasks selectedServices={this.state.selectedServices}/>
-          </div>
+          <Tasks selectedServices={this.state.selectedServices}/>
         </div>
       </MuiThemeProvider>
     );

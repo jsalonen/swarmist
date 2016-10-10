@@ -29,4 +29,7 @@ Start swarmist and connect to tunneled port:
 ## TODO
 
 - [ ] Display connection error
-- [ ] Display service stats (pending: https://github.com/docker/docker/issues/24597)
+- [ ] Support for service stats (pending: https://github.com/docker/docker/issues/24597)
+- [ ] Support for service logs (pending: https://github.com/docker/docker/issues/24812)
+
+Other pending swarm improvements: https://github.com/docker/docker/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3Aarea%2Fswarm%20label%3Akind%2Fenhancement

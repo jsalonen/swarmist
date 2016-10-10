@@ -29,3 +29,4 @@ Start swarmist and connect to tunneled port:
 ## TODO
 
 - [ ] Display connection error
+- [ ] Display service stats (pending: https://github.com/docker/docker/issues/24597)

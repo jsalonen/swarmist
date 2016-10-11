@@ -76,7 +76,7 @@ class Services extends Component {
                   <TableRowColumn>
                     <ServiceReplicaStatus
                       replicas={service.Spec.Mode.Replicated.Replicas}
-                      replicasRunning={service._Swarmist.ReplicasRunning} />
+                      replicasRunning={service.ReplicasRunning} />
                   </TableRowColumn>
                   <TableRowColumn>
                     <ServiceUpdateStatus state={service.UpdateStatus.State} />

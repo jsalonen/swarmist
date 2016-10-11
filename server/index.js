@@ -39,9 +39,7 @@ app.get('/api/services', (req, res) => {
           return (task.ServiceID === service.ID) && (task.Status.State === 'running');
         }).length;
 
-        service._Swarmist = {
-          ReplicasRunning: replicasRunning
-        };
+        service.ReplicasRunning = replicasRunning;
         return service;
       })
 

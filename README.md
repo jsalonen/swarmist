@@ -16,7 +16,7 @@ Create an SSH tunnel to manager node:
 
 Start swarmist and connect to tunneled port:
 
-	SWARMIST_DOCKER_URI=http://localhost:2375 npm start
+	DOCKER_HOST=http://localhost:2375 npm start
 
 ### As a Swarm Mode Service
 

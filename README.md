@@ -1,3 +1,4 @@
+[![](https://images.microbadger.com/badges/image/jsalonen/swarmist.svg)](https://microbadger.com/images/jsalonen/swarmist "Get your own image badge on microbadger.com")
 # Swarmist
 
 Experimental GUI and tools for Docker Swarm Mode

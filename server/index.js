@@ -44,5 +44,5 @@ app.get('/api/tasks', (req, res) => {
 });
 
 app.listen(3001, function () {
-  console.info('DOCKER_HOST parsed as: ', dockerOpts);
+  console.info('DOCKER_HOST parsed as: ', options);
 });

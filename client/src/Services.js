@@ -44,7 +44,10 @@ class Services extends Component {
   render() {
     var services;
     if(!this.state.services || !this.state.services.length) {
-      services = <p/>
+      services = 
+        <div>
+          <Subheader>No services</Subheader>
+        </div>
     } else {
       services =
         <div>

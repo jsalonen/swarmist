@@ -1,6 +1,7 @@
 package main
 
 import (
+  "os"
   "fmt"
   "context"
 
@@ -73,5 +74,10 @@ func main(){
     ctx.JSON(iris.StatusOK, tasks)
   })
 
-  iris.Listen(":3001")
+  listenTo := ":3000"
+  if os.Getenv("PORT") != "" {
+    listenTo = ":" + os.Getenv("PORT")
+  }
+  fmt.Println("Listening to ", listenTo)
+  iris.Listen(listenTo)
 }

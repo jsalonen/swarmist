@@ -6,6 +6,8 @@ var docker = new Docker(options);
 var express = require('express');
 var app = express();
 
+app.use('/', express.static('client/build'));
+
 app.get('/api/services', (req, res) => {
   docker.listTasks((err, tasks) => {
     if(err) {
@@ -43,6 +45,6 @@ app.get('/api/tasks', (req, res) => {
   });
 });
 
-app.listen(3001, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.info('DOCKER_HOST parsed as: ', options);
 });

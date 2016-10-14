@@ -1,15 +1,17 @@
-FROM node:slim
+FROM mhart/alpine-node
 
-# Install packages
-ADD package.json /src/package.json
-RUN cd /src && npm install
+# Build server
+COPY package.json /src/package.json
+RUN cd /src && npm install --production
+COPY server /src/server
 
-ADD client/package.json /src/client/package.json
-RUN cd /src/client && npm install
+# Build client
+COPY client /src/client
+RUN cd /src/client && npm install && npm run build \
+    && rm -rf /src/client/node_modules
 
-# Copy sources
-ADD . /src
+# Workdir
 WORKDIR /src
 
 EXPOSE 3000
-CMD [ "npm", "start" ]
+CMD [ "node", "server/index.js" ]

@@ -78,6 +78,5 @@ func main(){
   if os.Getenv("PORT") != "" {
     listenTo = ":" + os.Getenv("PORT")
   }
-  fmt.Println("Listening to ", listenTo)
   iris.Listen(listenTo)
 }

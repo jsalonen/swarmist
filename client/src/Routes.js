@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, hashHistory } from 'react-router';
 
-import App from './App';
+import App from './components/App';
 import NotFound from './components/NotFound';
 import Dashboard from './components/Dashboard';
 

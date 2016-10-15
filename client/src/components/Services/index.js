@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Subheader from 'material-ui/Subheader';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import IdField from './IdField';
-import ServiceUpdateStatus from './ServiceUpdateStatus';
-import ServiceReplicaStatus from './ServiceReplicaStatus';
+import IdField from '../IdField';
+import ServiceUpdateStatus from '../ServiceUpdateStatus';
+import ServiceReplicaStatus from '../ServiceReplicaStatus';
 
 class Services extends Component {
   constructor(props) {

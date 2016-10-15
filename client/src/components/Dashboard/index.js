@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Services from '../../Services';
-import Tasks from '../../Tasks';
+import Services from '../Services';
+import Tasks from '../Tasks';
 
 class Dashboard extends Component {
   constructor(props) {

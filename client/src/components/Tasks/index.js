@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Subheader from 'material-ui/Subheader';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import IdField from './IdField';
+import IdField from '../IdField';
 
 class Tasks extends Component {
   constructor(props) {

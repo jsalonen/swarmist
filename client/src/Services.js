@@ -78,8 +78,8 @@ class Services extends Component {
                   </TableRowColumn>
                   <TableRowColumn>
                     <ServiceReplicaStatus
-                      replicas={service.Spec.Mode.Replicated.Replicas}
-                      replicasRunning={service.ReplicasRunning} />
+                      running={service.ReplicasRunning}
+                      desired={service.Spec.Mode.Replicated.Replicas} />
                   </TableRowColumn>
                   <TableRowColumn>
                     <ServiceUpdateStatus state={service.UpdateStatus.State} />

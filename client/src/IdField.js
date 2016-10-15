@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class IdField extends Component {
-  render() {
-  	return (
-  		<span>{this.props.value.substring(0,24)}</span>
-	);
-  }
-}
+export const IdField = (props) => (
+  <span>{props.value.substring(0,24)}</span>
+)
 
 export default IdField;

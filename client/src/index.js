@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { browserHistory } from 'react-router';
+import Routes from './Routes';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './index.css';
 
@@ -9,6 +10,6 @@ import './index.css';
 injectTapEventPlugin();
 
 ReactDOM.render(
-  <App />,
+  <Routes history={browserHistory} />,
   document.getElementById('root')
 );

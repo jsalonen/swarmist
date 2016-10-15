@@ -34,7 +34,7 @@ function getReplicaStatusIcon(running, desired) {
   }
 }
 
-export const ServiceReplicaStatus = (props) => {
+const ServiceReplicaStatus = (props) => {
   const icon = getReplicaStatusIcon(props.running, props.desired);
 
   return (

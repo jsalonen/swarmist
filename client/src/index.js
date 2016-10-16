@@ -1,15 +1,21 @@
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory } from 'react-router';
-import Routes from './Routes';
+import { Router, hashHistory } from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import './index.css';
+import routes from './routes2';
 
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
+import ConnectionStore from './stores/ConnectionStore';
+
+// Required for onTouchTap (http://stackoverflow.com/a/34015469/988941)
 injectTapEventPlugin();
 
-ReactDOM.render(
-  <Routes history={browserHistory} />,
-  document.getElementById('root')
-);
+const stores = {
+  connectionStore: new ConnectionStore()
+}
+
+stores.connectionStore.connect();
+
+ReactDOM.render((
+  <Router history={hashHistory} routes={routes(stores)}></Router>
+), document.getElementById('root'))

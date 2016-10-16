@@ -8,16 +8,26 @@ var app = express();
 
 app.use('/', express.static('client/build'));
 
+app.get('/api/docker/info', (req, res) => {
+  docker.info((err, info) => {
+    if(err) {
+      return res.status(503).json(err);
+    } else {
+      return res.json(info);
+    }
+  });
+});
+
 app.get('/api/services', (req, res) => {
   docker.listTasks((err, tasks) => {
     if(err) {
       console.error(err);
-      return res.status(500).send(err);
+      return res.status(503).json(err);
     } else {
       docker.listServices((err, services) => {
         if(err) {
           console.error(err);
-          return res.status(500).send(err);
+          return res.status(503).send(err);
         } else {
           services.map((service) => {
             const replicasRunning = tasks.filter((task) => {
@@ -38,7 +48,8 @@ app.get('/api/services', (req, res) => {
 app.get('/api/tasks', (req, res) => {
   docker.listTasks((err, tasks) => {
     if(err) {
-      return res.status(500).send(err);
+      console.error(err);
+      return res.status(503).json(err);
     } else {
       return res.json(tasks);
     }

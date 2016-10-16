@@ -18,7 +18,11 @@ class Services extends Component {
       accept: 'application/json'
     })
       .then((response) => {
-        return response.json();
+        if(response.ok) {
+          return response.json();
+        } else {
+          throw response.statusText;
+        }
       })
       .then((services) => {
         this.setState({
@@ -26,7 +30,7 @@ class Services extends Component {
         });
       })
       .catch((error) => {
-        console.error(error);
+        console.error('loadService error: ', error);
       });
   }
 

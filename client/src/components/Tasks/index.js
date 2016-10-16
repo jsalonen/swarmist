@@ -16,7 +16,11 @@ class Tasks extends Component {
       accept: 'application/json'
     })
       .then((response) => {
-        return response.json();
+        if(response.ok) {
+          return response.json();
+        } else {
+          throw response.statusText;
+        }
       })
       .then((tasks) => {
         tasks.sort((a, b) => {
@@ -36,7 +40,7 @@ class Tasks extends Component {
         });
       })
       .catch((error) => {
-        console.error(error);
+        console.error('loadTasks error: ', error);
       });
   }
 

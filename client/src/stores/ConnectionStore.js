@@ -4,7 +4,7 @@ class ConnectionStore {
   constructor() {
     extendObservable(this, {
       ok: false,
-      error: null,
+      error: false,
       info: {},
 
       connect: action(() => {
@@ -17,7 +17,7 @@ class ConnectionStore {
           } else {
             this.ok = false;
             return response.json().then((body) => {
-              this.error = body.code;
+              this.error = `Could not connect to Docker host at ${body.address} (${body.code})`;
               throw new Error('Connection error');
             });
           }

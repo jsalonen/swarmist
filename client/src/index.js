@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, hashHistory } from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import routes from './routes2';
+import routes from './routes';
 
 import ConnectionStore from './stores/ConnectionStore';
 

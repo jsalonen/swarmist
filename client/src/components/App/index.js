@@ -2,34 +2,34 @@ import {observer} from 'mobx-react';
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
+import ConnectionErrorInfo from '../ConnectionErrorInfo';
 
-const ConnectionInfo = observer(
-class ConnectionInfo extends Component {
-  render() {
-    return (
-      <h2>{this.props.connectionStore.error}</h2>
-    )
-  }
-});
+const App = observer(
+  class App extends Component {
+    render() {
+      const {connectionStore} = this.props.route;
+      let main = <div />;
 
-class App extends Component {
-  render() {
-    const {connectionStore} = this.props.route;
+      if(connectionStore.ok) {
+        main = this.props.children;
+      }
+      if (connectionStore.error) {
+        main = <ConnectionErrorInfo error={connectionStore.error}/>
+      }
 
-    return (
-      <MuiThemeProvider>
-        <div className="App">
-          <AppBar title={"Swarmist"} />
+      return (
+        <MuiThemeProvider>
+          <div className="App">
+            <AppBar title={"Swarmist"} />
 
-          <ConnectionInfo connectionStore={connectionStore} />
-
-          <div className="main">
-            {this.props.children}
+            <div className="main">
+              {main}
+            </div>
           </div>
-        </div>
-      </MuiThemeProvider>
-    );
+        </MuiThemeProvider>
+      );
+    }
   }
-}
+);
 
 export default App;

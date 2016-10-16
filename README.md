@@ -30,8 +30,13 @@ Start swarmist and connect to tunneled port:
 ## TODO
 
 - [X] Check connection and show errors (docker not connected, not in swarm)
+- [ ] Support digest images / re-pull current image
 - [ ] Support for service stats (tracking https://github.com/docker/docker/issues/24597)
 - [ ] Support for service logs (tracking https://github.com/docker/docker/issues/24812)
 - [ ] Recipe for using with traefik (tracking https://github.com/containous/traefik/pull/602#issuecomment-251024211)
 
 Other pending swarm improvements: https://github.com/docker/docker/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3Aarea%2Fswarm%20label%3Akind%2Fenhancement
+
+## Known Issues with Swarm Mode
+
+- Service update with latest does not update image (https://github.com/docker/docker/issues/24066)

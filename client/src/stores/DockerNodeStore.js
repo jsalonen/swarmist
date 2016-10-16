@@ -1,9 +1,9 @@
 import {extendObservable, action} from 'mobx';
 
-class ConnectionStore {
+class DockerNodeStore {
   constructor() {
     extendObservable(this, {
-      ok: false,
+      connected: false,
       error: false,
       info: {},
 
@@ -15,31 +15,32 @@ class ConnectionStore {
           if(response.ok) {
             return response.json();
           } else {
-            this.ok = false;
+            this.connected = false;
+            this.error = `Could not connect to Docker`;
             return response.json().then((body) => {
-              this.error = `Could not connect to Docker host at ${body.address} (${body.code})`;
+              this.error = `Could not connect to Docker at ${body.address} (${body.code})`;
               throw new Error('Connection error');
             });
           }
         })
         .then((info) => {
+          this.connected = true;
+          this.info = info;
+
           if(info.Swarm.LocalNodeState !== 'active') {
-            this.error = 'Connected to Docker; Swarm mode not active';
+            this.error = 'This node is not running on a swarm.';
           } else if(!info.Swarm.ControlAvailable) {
-            this.error = 'Connected to Swarm; Not running on manager node';
+            this.error = 'This node is not running as a swarm manager.';
           } else {
-            this.ok = true;
             this.error = null;
           }
-
-          this.info = info;
         })
         .catch((error) => {
-          this.ok = false;
+          this.connected = false;
         });
       })
     });
   }
 }
 
-export default ConnectionStore;
+export default DockerNodeStore;

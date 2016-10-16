@@ -24,6 +24,9 @@ const App = observer(
           nodeStore.getServices();
           nodeStore.getTasks();
         }
+        if(nodeStore.error) {
+          nodeStore.connect();
+        }
       }
     }
 

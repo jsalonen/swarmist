@@ -6,48 +6,16 @@ import ServiceUpdateStatus from '../ServiceUpdateStatus';
 import ServiceReplicaStatus from '../ServiceReplicaStatus';
 
 class Services extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      services: []
-    };
-  }
-
-  loadServices() {
-    fetch('/api/services/', {
-      accept: 'application/json'
-    })
-      .then((response) => {
-        if(response.ok) {
-          return response.json();
-        } else {
-          throw response.statusText;
-        }
-      })
-      .then((services) => {
-        this.setState({
-          services: services
-        });
-      })
-      .catch((error) => {
-        console.error('loadService error: ', error);
-      });
-  }
-
-  componentDidMount() {
-    this.loadServices();
-    setInterval(this.loadServices.bind(this), 1000);
-  }
-
   onRowSelection(rows) {
     this.props.onSelection(rows.map((index) => {
-      return this.state.services[index].ID;
+      return this.props.services[index].ID;
     }));
   }
 
   render() {
-    var services;
-    if(!this.state.services || !this.state.services.length) {
+    let services;
+
+    if(!this.props.services || !this.props.services.length) {
       services = 
         <div>
           <Subheader>No services</Subheader>
@@ -69,7 +37,7 @@ class Services extends Component {
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
-              {this.state.services.map((service, index) => (
+              {this.props.services.map((service, index) => (
                 <TableRow key={index} selected={this.props.selectedServices.indexOf(service.ID) !== -1}>
                   <TableRowColumn>
                     {service.Spec.Name} (<IdField value={service.ID}></IdField>)

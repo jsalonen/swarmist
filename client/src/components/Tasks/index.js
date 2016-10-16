@@ -4,59 +4,14 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 import IdField from '../IdField';
 
 class Tasks extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tasks: []
-    };
-  }
-
-  loadTasks() {
-    fetch('/api/tasks', {
-      accept: 'application/json'
-    })
-      .then((response) => {
-        if(response.ok) {
-          return response.json();
-        } else {
-          throw response.statusText;
-        }
-      })
-      .then((tasks) => {
-        tasks.sort((a, b) => {
-          if(a.UpdatedAt > b.UpdatedAt) {
-            return -1;
-          }
-          if(a.UpdatedAt < b.UpdatedAt) {
-            return 1;
-          }
-          return 0;
-        });
-
-        this.setState({
-          tasks: tasks.filter((task) => 
-            task.DesiredState !== 'shutdown' || task.Status.State !== 'shutdown'
-          )
-        });
-      })
-      .catch((error) => {
-        console.error('loadTasks error: ', error);
-      });
-  }
-
-  componentDidMount() {
-    this.loadTasks();
-    setInterval(this.loadTasks.bind(this), 1000);
-  }
-
   render() {
-    if(!this.state.tasks || !this.state.tasks.length || !this.props.selectedServices.length) {
+    if(!this.props.tasks || !this.props.tasks.length || !this.props.selectedServices.length) {
       return (<div>
         <hr/>
       </div>);
     } else {
       const filteredTasks =
-        this.state.tasks.filter((task) => 
+        this.props.tasks.filter((task) => 
           this.props.selectedServices.indexOf(task.ServiceID) !== -1
         );
 

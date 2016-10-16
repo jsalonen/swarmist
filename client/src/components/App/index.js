@@ -1,36 +1,39 @@
-import {observer} from 'mobx-react';
 import React, { Component } from 'react';
+import {observer} from 'mobx-react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import ConnectionStatusInfo from '../ConnectionStatusInfo';
+import AppMain from '../AppMain';
 
 const App = observer(
   class App extends Component {
-    render() {
-      const {dockerNodeStore} = this.props.route;
-      let main;
+    componentDidMount() {
+      const {nodeStore} = this.props.route;
+      nodeStore.connect();
+      nodeStore.polling = true;
 
-      if(!dockerNodeStore.connected && !dockerNodeStore.error) {
-        main =
-          <ConnectionStatusInfo          
-           title="Connecting..."
-           subtitle="Connecting to Docker node - please wait" />
-      } else if(dockerNodeStore.error) {
-        main =
-          <ConnectionStatusInfo
-            title="Connection Error"
-            subtitle={dockerNodeStore.error}/>
-      } else {
-        main = this.props.children;
+      this.pollLoop();
+    }
+
+    pollLoop() {
+      const {nodeStore} = this.props.route;
+
+      if(nodeStore.polling) {
+        nodeStore.getServices.bind(this)();
+        nodeStore.getTasks.bind(this)();
       }
+    }
+
+    render() {
+      const {nodeStore} = this.props.route;
 
       return (
         <MuiThemeProvider>
           <div className="App">
             <AppBar title={"Swarmist"} />
-
             <div className="main">
-              {main}
+              <AppMain {...nodeStore} inSwarm={nodeStore.inSwarm}>
+                {this.props.children}
+              </AppMain>
             </div>
           </div>
         </MuiThemeProvider>

@@ -29,7 +29,7 @@ Start swarmist and connect to tunneled port:
 
 ## TODO
 
-- [X] Check connection and display error if fails (docker not connected, swarm not active, swarm not manager)
+- [X] Check connection and show errors (docker not connected, not in swarm)
 - [ ] Support for service stats (tracking https://github.com/docker/docker/issues/24597)
 - [ ] Support for service logs (tracking https://github.com/docker/docker/issues/24812)
 - [ ] Recipe for using with traefik (tracking https://github.com/containous/traefik/pull/602#issuecomment-251024211)

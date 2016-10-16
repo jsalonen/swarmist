@@ -17,10 +17,7 @@ class AppMain extends Component {
           title="Swarm Mode Not Enabled"
           subtitle="This node is not running in a swarm. Please enable swarm mode to continue." />
     } else if(!connected) {
-      main =
-        <ConnectionStatusInfo          
-         title="Connecting"
-         subtitle="Connecting to Docker node - please wait..." />
+      main = <div />
     } else {
       main = this.props.children;
     }

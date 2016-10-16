@@ -7,6 +7,8 @@ class NodeStore {
       error: false,
       polling: false,
       info: {},
+      tasks: [],
+      services: [],
 
       inSwarm: () => {
         return(this.info && this.info.Swarm && this.info.Swarm.LocalNodeState === 'active');

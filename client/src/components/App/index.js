@@ -11,15 +11,19 @@ const App = observer(
       nodeStore.connect();
       nodeStore.polling = true;
 
-      this.pollLoop();
+      setInterval(() => {
+        this.pollLoop();
+      }, 1000);
     }
 
     pollLoop() {
       const {nodeStore} = this.props.route;
 
       if(nodeStore.polling) {
-        nodeStore.getServices.bind(this)();
-        nodeStore.getTasks.bind(this)();
+        if(nodeStore.inSwarm) {
+          nodeStore.getServices();
+          nodeStore.getTasks();
+        }
       }
     }
 

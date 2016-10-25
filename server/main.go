@@ -9,6 +9,7 @@ import (
 	"github.com/docker/docker/api/types/swarm"
 	"github.com/docker/docker/client"
 	"github.com/kataras/iris"
+	"github.com/iris-contrib/middleware/cors"
 )
 
 type SwarmistService struct {
@@ -22,6 +23,8 @@ func main() {
 		panic(err)
 	}
 
+	iris.Use(cors.Default())
+
 	iris.Get("/", func(ctx *iris.Context) {
 		requestpath := "client/build/index.html"
 		ctx.ServeFile(requestpath, true)
@@ -30,6 +33,17 @@ func main() {
 	iris.Get("/static/*file", func(ctx *iris.Context) {
 		requestpath := "client/build/static" + ctx.Param("file")
 		ctx.ServeFile(requestpath, true)
+	})
+
+	iris.Get("/api/info", func(ctx *iris.Context) {
+		info, err := cli.Info(context.Background())
+		if err != nil {
+			fmt.Println(err)
+			ctx.EmitError(iris.StatusInternalServerError)
+			return
+		}
+
+		ctx.JSON(iris.StatusOK, info)
 	})
 
 	iris.Get("/api/services", func(ctx *iris.Context) {

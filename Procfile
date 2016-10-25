@@ -1,2 +1,2 @@
-web: cd client && npm start
-api: PORT=3001 npm run server
+client: cd client && npm start
+server: PORT=3001 npm run server

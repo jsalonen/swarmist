@@ -8,7 +8,7 @@ var app = express();
 
 app.use('/', express.static('client/build'));
 
-app.get('/api/docker/info', (req, res) => {
+app.get('/api/info', (req, res) => {
   docker.info((err, info) => {
     if(err) {
       return res.status(503).json(err);

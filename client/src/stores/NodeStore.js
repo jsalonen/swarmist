@@ -15,7 +15,7 @@ class NodeStore {
       },
 
       connect: action(() => {
-        fetch('/api/docker/info', {
+        fetch('/api/info', {
           accept: 'application/json'
         })
         .then((response) => {

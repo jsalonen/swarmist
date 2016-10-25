@@ -12,7 +12,7 @@ import (
 	"github.com/iris-contrib/middleware/cors"
 )
 
-type SwarmistService struct {
+type swarmistService struct {
 	swarm.Service
 	ReplicasRunning int
 }
@@ -61,9 +61,9 @@ func main() {
 			return
 		}
 
-		swarmistServices := make([]SwarmistService, len(services))
+		swarmistServices := make([]swarmistService, len(services))
 		for i, service := range services {
-			swarmistService := SwarmistService{service, 0}
+			swarmistService := swarmistService{service, 0}
 
 			replicasRunning := 0
 			for _, task := range tasks {

@@ -4,7 +4,9 @@
 
 Simple GUI for Docker Swarm Mode
 
+<kbd>
 ![](screenshot.png)
+</kbd>
 
 ## How to Run
 

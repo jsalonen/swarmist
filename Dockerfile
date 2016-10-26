@@ -1,8 +1,17 @@
-FROM scratch
+FROM mhart/alpine-node
 
-COPY server/build/main /server
-COPY client/build /client/build
-ENV PORT 3000
+# Workdir		
+WORKDIR /src
+
+# Build server		
+COPY package.json /src/package.json		
+RUN npm install --production		
+COPY server server		
+
+# Build client		
+COPY client client		
+RUN cd client && npm install && npm run build \		
+    && rm -rf node_modules		
+		
 EXPOSE 3000
-
-CMD ["/server"]
+CMD node server/index.js

@@ -8,6 +8,10 @@ go:
 services:
   - docker
 
+env:
+  - GOOS=linux
+  - GOARCH=amd64
+
 install:
   - nvm install 6.1
   - cd client && npm install && cd -

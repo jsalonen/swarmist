@@ -1,9 +1,7 @@
 set -e
 
 # Build server
-export GOOS=linux
-export GOARCH=amd64
-make
+GOOS=linux GOARCH=amd64 go build -o server/build/main server/main.go
 
 # Build client
 cd client \

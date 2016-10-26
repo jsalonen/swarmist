@@ -1,4 +1,4 @@
-[![](https://images.microbadger.com/badges/image/jsalonen/swarmist.svg)](https://microbadger.com/images/jsalonen/swarmist "Get your own image badge on microbadger.com") [![Go Report Card](https://goreportcard.com/badge/github.com/jsalonen/swarmist)](https://goreportcard.com/report/github.com/jsalonen/swarmist)
+[![](https://images.microbadger.com/badges/image/jsalonen/swarmist.svg)](https://microbadger.com/images/jsalonen/swarmist "Get your own image badge on microbadger.com") [![Go Report Card](https://goreportcard.com/badge/github.com/jsalonen/swarmist)](https://goreportcard.com/report/github.com/jsalonen/swarmist) [![Build Status](https://travis-ci.org/jsalonen/swarmist.svg?branch=master)](https://travis-ci.org/jsalonen/swarmist.svg?branch=master)
 
 # Swarmist
 

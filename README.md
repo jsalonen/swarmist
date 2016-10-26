@@ -4,6 +4,8 @@
 
 Simple GUI for Docker Swarm Mode
 
+![](screenshot.png)
+
 ## How to Run
 
 ### Locally

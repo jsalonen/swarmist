@@ -2,7 +2,7 @@
 
 # Swarmist
 
-Experimental GUI and tools for Docker Swarm Mode
+Simple GUI for Docker Swarm Mode
 
 ## How to Run
 

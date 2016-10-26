@@ -1,11 +1,12 @@
 set -e
 
 # Build server
-GOOS=linux GOARCH=amd64 go build -o server/build/linux-amd64 server/main.go
+export GOOS=linux
+export GOARCH=amd64
+make
 
 # Build client
 cd client \
-  && npm install \
   && npm run build \
   && cd -
 

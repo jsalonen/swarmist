@@ -1,0 +1,22 @@
+sudo: required
+
+language: go
+
+go:
+  - 1.7.1
+
+services:
+  - docker
+
+install:
+  - nvm install 6.1
+  - cd client && npm install && cd -
+  - go get ./...
+  - go get github.com/opencontainers/runc/libcontainer/user
+
+script:
+  - ./build-docker.sh
+
+after_success:
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker push jsalonen/swarmist

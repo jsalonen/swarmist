@@ -11,13 +11,11 @@ class AppMain extends Component {
         <ConnectionStatusInfo
           title="Connection Error"
           subtitle={error}/>
-    } else if(connected && !inSwarm) {
+    } else if(connected && inSwarm === false) {
       main =
         <ConnectionStatusInfo
           title="Swarm Mode Not Enabled"
           subtitle="This node is not running in a swarm. Please enable swarm mode to continue." />
-    } else if(!connected) {
-      main = <div />
     } else {
       main = this.props.children;
     }

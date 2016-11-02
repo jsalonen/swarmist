@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import {observer} from 'mobx-react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import AppMain from '../AppMain';
+import AppMain from '../components/AppMain';
+import { Link } from 'react-router';
+import './App.css';
+
+const style = {
+  homeButton: {
+    color: 'inherit',
+    textDecoration: 'none'
+  }
+};
 
 const App = observer(
   class App extends Component {
@@ -36,8 +45,9 @@ const App = observer(
       return (
         <MuiThemeProvider>
           <div className="App">
-            <AppBar title={"Swarmist"} />
+            <AppBar title={<Link to="/" style={style.homeButton}>Swarmist</Link>} />
             <div className="main">
+
               <AppMain {...nodeStore} inSwarm={nodeStore.inSwarm}>
                 {this.props.children}
               </AppMain>

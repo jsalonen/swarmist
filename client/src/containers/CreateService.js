@@ -41,13 +41,13 @@ class ServiceForm extends Component {
   }
 }
 
-const DeployService = observer(
-  class DeployService extends Component {
+const CreateService = observer(
+  class CreateService extends Component {
     render() {
       return (
          <div>
            <Breadcrumbs routes={this.props.routes} params={this.props.params}/>
-           <Paper style={style.paper} zDepth={3}>
+           <Paper style={style.paper} zDepth={1}>
              <h3 style={style.title}>Create Service</h3>
              <ServiceForm name="Name">
               <div style={{marginTop: 2 + 'rem'}}>
@@ -65,4 +65,4 @@ const DeployService = observer(
   }
 );
 
-export default DeployService;
+export default CreateService;

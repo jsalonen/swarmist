@@ -6,9 +6,7 @@ import IdField from '../IdField';
 class Tasks extends Component {
   render() {
     if(!this.props.tasks || !this.props.tasks.length || !this.props.selectedServices.length) {
-      return (<div>
-        <hr/>
-      </div>);
+      return (<div></div>);
     } else {
       const filteredTasks =
         this.props.tasks.filter((task) => 

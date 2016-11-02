@@ -31,16 +31,13 @@ const Dashboard = observer(
 
       return (
         <div>
-          <div>
-            <FlatButton
-              label="Create Service"
-              containerElement={<Link to="/services/create" />}
-              primary={true}
-              style={styles.button}
-              icon={<i className="material-icons">add</i>}
-            />
-          </div>
-
+          <FlatButton
+            label="Create Service"
+            containerElement={<Link to="/services/create" />}
+            primary={true}
+            style={styles.button}
+            icon={<i className="material-icons">add</i>}
+          />
           <Services
            services={nodeStore.services}
            onSelection={this.onServiceSelection.bind(this)}

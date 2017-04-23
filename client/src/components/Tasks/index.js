@@ -30,7 +30,6 @@ const Tasks = inject("nodeStore")(
 
           return (
             <div>
-              <hr />
               <Subheader>Tasks</Subheader>
               <Table selectable={false}>
                 <TableHeader adjustForCheckbox={false} displaySelectAll={false}>

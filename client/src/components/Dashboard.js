@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Services from "./Services";
 import Tasks from "./Tasks";
-import { Tabs, Tab } from "material-ui/Tabs";
 import ServiceLogs from "./ServiceLogs";
 /*
 import { Link } from 'react-router';
@@ -28,17 +27,15 @@ class Dashboard extends Component {
     return (
       <div>
         <Services />
-        <Tabs
-          inkBarStyle={{ background: "rgb(0, 188, 212)" }}
-          tabItemContainerStyle={{ backgroundColor: "rgb(64, 200, 232)" }}
-        >
-          <Tab label="Tasks">
+        <hr />
+        <div style={{ display: "flex" }}>
+          <div style={{ width: "50%" }}>
             <Tasks />
-          </Tab>
-          <Tab label="Logs">
+          </div>
+          <div style={{ width: "50%" }}>
             <ServiceLogs />
-          </Tab>
-        </Tabs>
+          </div>
+        </div>
       </div>
     );
   }

@@ -125,6 +125,7 @@ app.get("/api/services/:id/logs", (req, res) => {
     });
   }
 });
+
 app.get("/api/tasks", (req, res) => {
   docker.listTasks((err, tasks) => {
     if (err) {
@@ -132,6 +133,17 @@ app.get("/api/tasks", (req, res) => {
       return res.status(503).json(err);
     } else {
       return res.json(tasks);
+    }
+  });
+});
+
+app.get("/api/networks", (req, res) => {
+  docker.listNetworks((err, networks) => {
+    if (err) {
+      console.error(err);
+      return res.status(503).json(err);
+    } else {
+      return res.json(networks);
     }
   });
 });

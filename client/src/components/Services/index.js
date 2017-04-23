@@ -45,7 +45,7 @@ const Services = inject("nodeStore")(
                 <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                   <TableRow>
                     <TableHeaderColumn>Name</TableHeaderColumn>
-                    <TableHeaderColumn>Virtual IP</TableHeaderColumn>
+                    <TableHeaderColumn>Networks</TableHeaderColumn>
                     <TableHeaderColumn>Ports</TableHeaderColumn>
                     <TableHeaderColumn>Image</TableHeaderColumn>
                     <TableHeaderColumn>Mode</TableHeaderColumn>
@@ -66,23 +66,25 @@ const Services = inject("nodeStore")(
                       <TableRowColumn>
                         {(service.Endpoint.VirtualIPs || [])
                           .map((ip, index) => {
+                            const network = nodeStore.networks.find(
+                              network => network.Id === ip.NetworkID
+                            );
                             return (
-                              <div key={index} /*({ip.NetworkID})*/>
-                                {ip.Addr}
+                              <div key={index} style={{ padding: "1px 0" }}>
+                                {network.Name}
                               </div>
                             );
                           })}
                       </TableRowColumn>
                       <TableRowColumn>
                         {(service.Endpoint.Ports || []).map((port, index) => (
-                          <span key={index}>
+                          <div key={index} style={{ padding: "1px 0" }}>
                             {port.Protocol}
                             {" "}
                             {port.PublishedPort}
                             :
                             {port.TargetPort}
-                            <br />
-                          </span>
+                          </div>
                         ))}
                       </TableRowColumn>
                       <TableRowColumn>

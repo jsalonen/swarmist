@@ -8,6 +8,7 @@ class NodeStore {
       info: {},
       tasks: [],
       services: [],
+      networks: [],
       selectedServices: [],
       serviceLogs: new observable.map(),
 
@@ -116,6 +117,21 @@ class NodeStore {
           .catch(error => {
             this.error = "Error retrieving tasks";
           });
+      }),
+
+      fetchNetworks: action(() => {
+        fetch("/api/networks", {
+          accept: "application/json"
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw response.statusText;
+            }
+          })
+          .then(networks => (this.networks = networks))
+          .catch(console.error);
       })
     });
 
@@ -124,6 +140,7 @@ class NodeStore {
       if (this.isInSwarm && !this.error) {
         this.fetchServices();
         this.fetchTasks();
+        this.fetchNetworks();
       }
       if (this.selectedServices.length) {
         this.selectedServices.forEach(service => {

@@ -1,10 +1,9 @@
-import {observable} from 'mobx'
+import { observable } from "mobx";
 
 const serviceStore = observable({
-  name: '',
+  name: "",
   publish: [],
-  image: ''
+  image: ""
 });
 
 export default serviceStore;
-

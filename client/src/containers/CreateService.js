@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import {observer} from 'mobx-react';
-import Paper from 'material-ui/Paper';
-import Breadcrumbs from '../components/Breadcrumbs';
-import RaisedButton from 'material-ui/RaisedButton';
+import React, { Component } from "react";
+import { observer } from "mobx-react";
+import Paper from "material-ui/Paper";
+import Breadcrumbs from "../components/Breadcrumbs";
+import RaisedButton from "material-ui/RaisedButton";
 
 const style = {
   paper: {
-    padding: 1 + 'rem'
+    padding: 1 + "rem"
   },
   title: {
     margin: 0
   }
 };
 
-import TextField from 'material-ui/TextField';
+import TextField from "material-ui/TextField";
 
 class ServiceForm extends Component {
-  render () {
+  render() {
     return (
-      <form style={{maxWidth: 30 + 'rem'}}>
+      <form style={{ maxWidth: 30 + "rem" }}>
         <TextField
           floatingLabelText="Service Name"
           fullWidth={true}
@@ -36,7 +36,7 @@ class ServiceForm extends Component {
         />
         {this.props.children}
       </form>
-    )
+    );
   }
 }
 
@@ -44,21 +44,25 @@ const CreateService = observer(
   class CreateService extends Component {
     render() {
       return (
-         <div>
-           <Breadcrumbs routes={this.props.routes} params={this.props.params}/>
-           <Paper style={style.paper} zDepth={1}>
-             <h3 style={style.title}>Create Service</h3>
-             <ServiceForm name="Name">
-              <div style={{marginTop: 2 + 'rem'}}>
+        <div>
+          <Breadcrumbs routes={this.props.routes} params={this.props.params} />
+          <Paper style={style.paper} zDepth={1}>
+            <h3 style={style.title}>Create Service</h3>
+            <ServiceForm name="Name">
+              <div style={{ marginTop: 2 + "rem" }}>
                 <RaisedButton
                   label="Create"
                   primary={true}
-                  icon={<i className="material-icons" style={{color: '#fff'}}>add</i>}
+                  icon={
+                    <i className="material-icons" style={{ color: "#fff" }}>
+                      add
+                    </i>
+                  }
                 />
               </div>
-             </ServiceForm>
-           </Paper>
-         </div>
+            </ServiceForm>
+          </Paper>
+        </div>
       );
     }
   }

@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import {inject, observer} from 'mobx-react';
-import Services from './Services';
-import Tasks from './Tasks';
+import React, { Component } from "react";
+import Services from "./Services";
+import Tasks from "./Tasks";
 /*
 import { Link } from 'react-router';
 
@@ -12,32 +11,25 @@ const styles = {
 };
 */
 
-const Dashboard = inject('nodeStore')(observer(
-  class Dashboard extends Component {
-    constructor(props) {
-      super(props);
-    }
+class Dashboard extends Component {
+  render() {
+    /*
+        <FlatButton
+          label="Create Service"
+          containerElement={<Link to="/services/create" />}
+          primary={true}
+          style={styles.button}
+          icon={<i className="material-icons">add</i>}
+        />
+    */
 
-    render() {
-      const {nodeStore} = this.props;
-      /*
-          <FlatButton
-            label="Create Service"
-            containerElement={<Link to="/services/create" />}
-            primary={true}
-            style={styles.button}
-            icon={<i className="material-icons">add</i>}
-          />
-      */
-
-      return (
-        <div>
-          <Services />
-          <Tasks />
-        </div>
-      );
-    }
+    return (
+      <div>
+        <Services />
+        <Tasks />
+      </div>
+    );
   }
-));
+}
 
 export default Dashboard;

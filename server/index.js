@@ -87,7 +87,7 @@ app.get("/api/services/:id/logs", (req, res) => {
           stderr: 1,
           follow: 0
           //tail: 25
-          //timestamps: 1,
+          //timestamps: 1
           //since: [UNIX timestamp]
         }
       };

@@ -6,7 +6,7 @@ function getReplicaStatusIcon(running, desired) {
       symbol: "\u2716",
       color: "red"
     };
-  } else if (desired === running) {
+  } else if (desired === running || desired === undefined) {
     return {
       symbol: "\u2714",
       color: "green"
@@ -42,8 +42,7 @@ const ServiceReplicaStatus = props => {
       <span style={{ color: icon.color }}>{icon.symbol}</span>
       {" "}
       {props.running}
-      {" / "}
-      {props.desired}
+      {props.desired && " / " + props.desired}
     </span>
   );
 };

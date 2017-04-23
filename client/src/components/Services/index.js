@@ -44,12 +44,11 @@ const Services = inject("nodeStore")(
               >
                 <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                   <TableRow>
-                    <TableHeaderColumn>ID</TableHeaderColumn>
-                    <TableHeaderColumn>Image</TableHeaderColumn>
-                    <TableHeaderColumn>
-                      Internal IP (Network ID)
-                    </TableHeaderColumn>
+                    <TableHeaderColumn>Name</TableHeaderColumn>
+                    <TableHeaderColumn>Virtual IP</TableHeaderColumn>
                     <TableHeaderColumn>Ports</TableHeaderColumn>
+                    <TableHeaderColumn>Image</TableHeaderColumn>
+                    <TableHeaderColumn>Mode</TableHeaderColumn>
                     <TableHeaderColumn>Replicas</TableHeaderColumn>
                     <TableHeaderColumn>Labels</TableHeaderColumn>
                   </TableRow>
@@ -61,19 +60,16 @@ const Services = inject("nodeStore")(
                         index
                       } /*selected={selectedServices.indexOf(service.ID) !== -1}*/
                     >
-                      <TableRowColumn>
-                        {service.Spec.Name} (<IdField value={service.ID} />)
-                      </TableRowColumn>
-                      <TableRowColumn>
-                        {service.Spec.TaskTemplate.ContainerSpec.Image}
+                      <TableRowColumn /*(<IdField value={service.ID} />)*/>
+                        {service.Spec.Name}
                       </TableRowColumn>
                       <TableRowColumn>
                         {(service.Endpoint.VirtualIPs || [])
                           .map((ip, index) => {
                             return (
-                              <span key={index}>
-                                {ip.Addr} ({ip.NetworkID})
-                              </span>
+                              <div key={index} /*({ip.NetworkID})*/>
+                                {ip.Addr}
+                              </div>
                             );
                           })}
                       </TableRowColumn>
@@ -90,9 +86,19 @@ const Services = inject("nodeStore")(
                         ))}
                       </TableRowColumn>
                       <TableRowColumn>
+                        {service.Spec.TaskTemplate.ContainerSpec.Image}
+                      </TableRowColumn>
+                      <TableRowColumn>
+                        {service.Spec.Mode.Global && <div>Global</div>}
+                        {service.Spec.Mode.Replicated && <div>Replicated</div>}
+                      </TableRowColumn>
+                      <TableRowColumn>
                         <ServiceReplicaStatus
                           running={service.ReplicasRunning}
-                          desired={service.Spec.Mode.Replicated.Replicas}
+                          desired={
+                            service.Spec.Mode.Replicated &&
+                              service.Spec.Mode.Replicated.Replicas
+                          }
                         />
                       </TableRowColumn>
                       <TableRowColumn>
@@ -100,10 +106,15 @@ const Services = inject("nodeStore")(
                           const value = service.Spec.Labels[key];
 
                           return (
+                            <div key={key}>
+                              {key} = {value}
+                            </div>
+                          );
+                          /*
                             <Chip backgroundColor={orange100} key={key}>
                               {value}
                             </Chip>
-                          );
+                            */
                         })}
                       </TableRowColumn>
                     </TableRow>

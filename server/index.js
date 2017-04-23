@@ -5,7 +5,6 @@ var options = dockerOpts(process.env.DOCKER_HOST);
 var docker = new Docker(options);
 var express = require("express");
 var app = express();
-var stripAnsi = require("strip-ansi");
 
 app.use("/", express.static("client/build"));
 
@@ -87,6 +86,9 @@ app.get("/api/services/:id/logs", (req, res) => {
           stdout: 1,
           stderr: 1,
           follow: 0
+          //tail: 25
+          //timestamps: 1,
+          //since: [UNIX timestamp]
         }
       };
 
@@ -102,7 +104,23 @@ app.get("/api/services/:id/logs", (req, res) => {
         // Replace SOH control characters (0x01) with newlines
         const nlData = data.replace(/\x01/g, "\n");
         return res.status(200).send(data);
-        //        return res.status(200).send(stripAnsi(data));
+        /*
+
+        for(let i = 0; i < data.length - 1; ++i) {
+          if(data.charCodeAt(i) === 2) {
+            const header = data.substring(i, i+8);
+            const headerCodes = [];
+            for(let j = 0; j < header.length; j++) {
+              const code = header.charCodeAt(j);
+              headerCodes.push(code);
+            }
+            console.log('header=', headerCodes);
+          }
+        }
+
+        const nlData = data.replace(/[\x00\x01\x02]/g, "\n");
+        return res.status(200).send(data);//data);
+        */
       }
     });
   }

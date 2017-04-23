@@ -23,8 +23,7 @@
   "dependencies": {
     "dockerode": "^2.3.1",
     "dockerode-options": "^0.2.1",
-    "express": "^4.14.0",
-    "strip-ansi": "^3.0.1"
+    "express": "^4.14.0"
   },
   "devDependencies": {
     "foreman": "^2.0.0",

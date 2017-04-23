@@ -4,9 +4,7 @@
 
 Simple GUI for Docker Swarm Mode
 
-<kbd>
-![](screenshot.png)
-</kbd>
+![Screenshot](https://raw.githubusercontent.com/jsalonen/swarmist/master/screenshot.png)
 
 ## How to Run
 

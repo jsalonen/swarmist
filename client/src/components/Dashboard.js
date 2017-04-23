@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Services from "./Services";
 import Tasks from "./Tasks";
+import { Tabs, Tab } from "material-ui/Tabs";
 import ServiceLogs from "./ServiceLogs";
 /*
 import { Link } from 'react-router';
@@ -27,8 +28,17 @@ class Dashboard extends Component {
     return (
       <div>
         <Services />
-        <Tasks />
-        <ServiceLogs />
+        <Tabs
+          inkBarStyle={{ background: "rgb(0, 188, 212)" }}
+          tabItemContainerStyle={{ backgroundColor: "rgb(64, 200, 232)" }}
+        >
+          <Tab label="Tasks">
+            <Tasks />
+          </Tab>
+          <Tab label="Logs">
+            <ServiceLogs />
+          </Tab>
+        </Tabs>
       </div>
     );
   }

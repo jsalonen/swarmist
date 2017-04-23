@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import Subheader from "material-ui/Subheader";
+import LogWindow from "./LogWindow";
 
-const Tasks = inject("nodeStore")(
+const ServiceLogs = inject("nodeStore")(
   observer(
     class Tasks extends Component {
       render() {
@@ -14,10 +15,12 @@ const Tasks = inject("nodeStore")(
           return (
             <div>
               <hr />
-              <Subheader>Logs</Subheader>
               {nodeStore.selectedServices.map((service, index) => {
                 return (
-                  <pre key={index}>{nodeStore.serviceLogs.get(service)}</pre>
+                  <LogWindow
+                    key={index}
+                    logs={nodeStore.serviceLogs.get(service)}
+                  />
                 );
               })}
             </div>
@@ -28,4 +31,4 @@ const Tasks = inject("nodeStore")(
   )
 );
 
-export default Tasks;
+export default ServiceLogs;

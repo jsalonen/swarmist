@@ -101,7 +101,8 @@ app.get("/api/services/:id/logs", (req, res) => {
       } else {
         // Replace SOH control characters (0x01) with newlines
         const nlData = data.replace(/\x01/g, "\n");
-        return res.status(200).send(stripAnsi(data));
+        return res.status(200).send(data);
+        //        return res.status(200).send(stripAnsi(data));
       }
     });
   }

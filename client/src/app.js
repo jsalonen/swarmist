@@ -6,6 +6,7 @@ import AppBar from "material-ui/AppBar";
 import AppMain from "./components/AppMain";
 import "./app.css";
 import Dashboard from "./components/Dashboard";
+require("react-ansi-style/inject-css");
 
 const App = observer(
   class App extends Component {

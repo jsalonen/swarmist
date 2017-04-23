@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {observer} from 'mobx-react';
 import Services from '../components/Services';
 import Tasks from '../components/Tasks';
-import FlatButton from 'material-ui/FlatButton';
+/*
 import { Link } from 'react-router';
 
 const styles = {
@@ -10,6 +10,7 @@ const styles = {
     margin: 0.6 + 'rem'
   }
 };
+*/
 
 const Dashboard = observer(
   class Dashboard extends Component {

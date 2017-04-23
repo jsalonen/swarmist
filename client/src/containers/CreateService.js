@@ -17,7 +17,6 @@ import TextField from 'material-ui/TextField';
 
 class ServiceForm extends Component {
   render () {
-    const {name} = this.props;
     return (
       <form style={{maxWidth: 30 + 'rem'}}>
         <TextField

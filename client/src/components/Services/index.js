@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import Subheader from "material-ui/Subheader";
+import Chip from "material-ui/Chip";
+import { orange100 } from "material-ui/styles/colors";
 import {
   Table,
   TableBody,
@@ -49,6 +51,7 @@ const Services = inject("nodeStore")(
                     </TableHeaderColumn>
                     <TableHeaderColumn>Ports</TableHeaderColumn>
                     <TableHeaderColumn>Replicas</TableHeaderColumn>
+                    <TableHeaderColumn>Labels</TableHeaderColumn>
                   </TableRow>
                 </TableHeader>
                 <TableBody displayRowCheckbox={false}>
@@ -91,6 +94,17 @@ const Services = inject("nodeStore")(
                           running={service.ReplicasRunning}
                           desired={service.Spec.Mode.Replicated.Replicas}
                         />
+                      </TableRowColumn>
+                      <TableRowColumn>
+                        {Object.keys(service.Spec.Labels || {}).map(key => {
+                          const value = service.Spec.Labels[key];
+
+                          return (
+                            <Chip backgroundColor={orange100} key={key}>
+                              {value}
+                            </Chip>
+                          );
+                        })}
                       </TableRowColumn>
                     </TableRow>
                   ))}

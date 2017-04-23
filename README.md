@@ -28,7 +28,7 @@ Start swarmist and connect to tunneled port:
       --name swarmist \
       --constraint node.role==manager \
       --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-      --publish 3000:3000 jsalonen/swarmist
+      --publish 4000:4000 jsalonen/swarmist
 
 ## Recipes
 

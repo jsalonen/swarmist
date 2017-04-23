@@ -13,5 +13,5 @@ COPY client client
 RUN cd client && npm install && npm run build \		
     && rm -rf node_modules		
 		
-EXPOSE 3000
+EXPOSE 4000
 CMD node server/index.js

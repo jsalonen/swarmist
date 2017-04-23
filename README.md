@@ -56,7 +56,7 @@ See also: ["Traefik Swarm Mode Guide"](https://github.com/containous/traefik/blo
 - [ ] Support digest images / re-pull current image on update ((https://github.com/docker/docker/issues/24066)
   - [ ] Docker 1.13 will include --force option (https://github.com/docker/docker/pull/27596)
 - [ ] Support for service stats (tracking https://github.com/docker/docker/issues/24597)
-- [ ] Support for service logs (tracking https://github.com/docker/docker/issues/24812)
+- [X] Support for service logs (tracking https://github.com/docker/docker/issues/24812)
 - [X] Recipe for using with traefik (https://github.com/containous/traefik/blob/v1.1/docs/user-guide/swarm-mode.md)
   - [X] Pending: https://github.com/containous/traefik/pull/602#issuecomment-251024211
 

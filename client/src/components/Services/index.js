@@ -12,7 +12,7 @@ import {
   TableRowColumn
 } from "material-ui/Table";
 import IdField from "../IdField";
-import ServiceUpdateStatus from "../ServiceUpdateStatus";
+//import ServiceUpdateStatus from "../ServiceUpdateStatus";
 import ServiceReplicaStatus from "../ServiceReplicaStatus";
 
 const Services = inject("nodeStore")(

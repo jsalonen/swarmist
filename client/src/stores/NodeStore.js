@@ -1,4 +1,4 @@
-import { extendObservable, action } from "mobx";
+import { extendObservable, action, observable } from "mobx";
 
 class NodeStore {
   constructor() {
@@ -9,6 +9,7 @@ class NodeStore {
       tasks: [],
       services: [],
       selectedServices: [],
+      serviceLogs: new observable.map(),
 
       get isInSwarm() {
         return (
@@ -70,6 +71,20 @@ class NodeStore {
           });
       }),
 
+      fetchServiceLogs: action(serviceId => {
+        fetch(`/api/services/${serviceId}/logs`)
+          .then(response => {
+            if (response.ok) {
+              return response.text();
+            } else {
+              throw response.statusText;
+            }
+          })
+          .then(logs => {
+            this.serviceLogs.set(serviceId, logs);
+          });
+      }),
+
       fetchTasks: action(() => {
         fetch("/api/tasks", {
           accept: "application/json"
@@ -109,6 +124,11 @@ class NodeStore {
       if (this.isInSwarm && !this.error) {
         this.fetchServices();
         this.fetchTasks();
+      }
+      if (this.selectedServices.length) {
+        this.selectedServices.map(service => {
+          this.fetchServiceLogs(service);
+        });
       }
     }, 1000);
   }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Services from "./Services";
 import Tasks from "./Tasks";
+import ServiceLogs from "./ServiceLogs";
 /*
 import { Link } from 'react-router';
 
@@ -27,6 +28,7 @@ class Dashboard extends Component {
       <div>
         <Services />
         <Tasks />
+        <ServiceLogs />
       </div>
     );
   }

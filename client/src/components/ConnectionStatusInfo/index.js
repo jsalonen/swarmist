@@ -6,11 +6,11 @@ const style = {
   padding: 1 + 'rem'
 };
 
-const ConnectionStatusInfo = (props) => {
+const ConnectionStatusInfo = ({title, subtitle}) => {
   return (
   	<Paper style={style} zDepth={2}>
-  	  <h2>{props.title}</h2>
-  	  <h3>{props.subtitle}</h3>
+  	  <h2>{title}</h2>
+  	  <h3>{subtitle}</h3>
 	</Paper>
   );
 };

@@ -5,16 +5,16 @@ class NodeStore {
     extendObservable(this, {
       connected: false,
       error: false,
-      polling: false,
       info: {},
       tasks: [],
       services: [],
+      selectedServices: [],
 
-      inSwarm: () => {
+      get isInSwarm() {
         return(this.info && this.info.Swarm && this.info.Swarm.LocalNodeState === 'active');
       },
 
-      connect: action(() => {
+      fetchInfo: action(() => {
         fetch('/api/info', {
           accept: 'application/json'
         })
@@ -25,7 +25,7 @@ class NodeStore {
             this.connected = false;
             this.error = `Could not connect to Docker`;
             return response.json().then((body) => {
-              this.error = `Could not connect to Docker at ${body.address} (${body.code})`;
+              this.error = `Could not connect to Docker socket`;
               throw new Error('Connection error');
             });
           }
@@ -47,7 +47,7 @@ class NodeStore {
         });
       }),
 
-      getServices: action(() => {
+      fetchServices: action(() => {
         fetch('/api/services/', {
           accept: 'application/json'
         })
@@ -66,7 +66,7 @@ class NodeStore {
         });
       }),
 
-      getTasks: action(() => {
+      fetchTasks: action(() => {
         fetch('/api/tasks', {
           accept: 'application/json'
         })
@@ -97,6 +97,14 @@ class NodeStore {
         });
       })
     });
+
+    this.unbindPolls = setInterval(() => {
+      this.fetchInfo();
+      if(this.isInSwarm && !this.error) {
+        this.fetchServices();
+        this.fetchTasks();
+      }
+    }, 1000);
   }
 }
 

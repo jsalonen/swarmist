@@ -1,19 +1,22 @@
 import React from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 
-const ServiceUpdateStatus = (props) => {
-  if(props.state === 'updating') {
+const ServiceUpdateStatus = ({service}) => {
+  return <div />;
+  /*
+  if(props.updateStatus.state === 'updating') {
     return (
       <span>
         <CircularProgress size={14} thickness={2} /> &nbsp;
-        {props.state || ''}
+        {props.updateStatus.state || ''}
       </span>
     );
   } else {
     return (
-      <span>{props.state || ''}</span>
+      <span>{props.updateStatus.state || ''}</span>
     );
   }
+  */
 };
 
 export default ServiceUpdateStatus;

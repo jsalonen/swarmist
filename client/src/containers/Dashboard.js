@@ -28,9 +28,7 @@ const Dashboard = observer(
 
     render() {
       const {nodeStore} = this.props.route;
-
-      return (
-        <div>
+      /*
           <FlatButton
             label="Create Service"
             containerElement={<Link to="/services/create" />}
@@ -38,6 +36,10 @@ const Dashboard = observer(
             style={styles.button}
             icon={<i className="material-icons">add</i>}
           />
+      */
+
+      return (
+        <div>
           <Services
            services={nodeStore.services}
            onSelection={this.onServiceSelection.bind(this)}

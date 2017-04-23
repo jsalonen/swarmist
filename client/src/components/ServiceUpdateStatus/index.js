@@ -1,7 +1,7 @@
-import React from 'react';
-import CircularProgress from 'material-ui/CircularProgress';
+import React from "react";
+import CircularProgress from "material-ui/CircularProgress";
 
-const ServiceUpdateStatus = ({service}) => {
+const ServiceUpdateStatus = ({ service }) => {
   return <div />;
   /*
   if(props.updateStatus.state === 'updating') {

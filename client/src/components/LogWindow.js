@@ -23,7 +23,7 @@ class LogWindow extends Component {
   render() {
     const { logs } = this.props;
 
-    if (!logs) {
+    if (logs === undefined || logs === null) {
       return <div />;
     } else {
       return (

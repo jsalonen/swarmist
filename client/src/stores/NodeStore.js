@@ -126,7 +126,7 @@ class NodeStore {
         this.fetchTasks();
       }
       if (this.selectedServices.length) {
-        this.selectedServices.map(service => {
+        this.selectedServices.forEach(service => {
           this.fetchServiceLogs(service);
         });
       }

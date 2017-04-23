@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import reactAnsiStyle from "react-ansi-style";
 
 const styles = {

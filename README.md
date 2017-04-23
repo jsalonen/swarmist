@@ -6,11 +6,13 @@ Simple GUI for Docker Swarm Mode
 
 ![Screenshot](https://raw.githubusercontent.com/jsalonen/swarmist/master/screenshot.png)
 
+For something similar, check out [Portainer](http://portainer.io/).
+
 ## How to Run
 
 ### Locally
 
-	docker run -it -v /var/run/docker.sock:/var/run/docker.sock -p 3000:3000 jsalonen/swarmist
+	docker run -it -v /var/run/docker.sock:/var/run/docker.sock -p 4000:4000 jsalonen/swarmist
 
 ### Against Remote Swarm
 

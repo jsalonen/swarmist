@@ -9,7 +9,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "client/src/**/*.js": [
+    "*.js": [
       "prettier --write",
       "git add"
     ]

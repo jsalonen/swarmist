@@ -25,7 +25,7 @@ function getReplicaStatusIcon(running, desired) {
     return {
       symbol: '\u25BC',
       color: 'orange'
-    };
+    }
   } else {
     return {
       symbol: '?',

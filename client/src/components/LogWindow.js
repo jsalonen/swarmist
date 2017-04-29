@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import reactAnsiStyle from "react-ansi-style";
 
 const FONT_SIZE = 14;
+const COLOR_STDERR = "red";
+const COLOR_STDOUT = "inherit";
 const styles = {
   margin: "16px",
   padding: "8px",
@@ -22,13 +23,25 @@ class LogWindow extends Component {
 
   render() {
     const { logs } = this.props;
+    console.log(logs);
 
-    if (logs === undefined || logs === null) {
+    if (!logs) {
       return <div />;
     } else {
       return (
         <pre style={styles} ref={pre => (this.preElem = pre)}>
-          {reactAnsiStyle(React, logs)}
+          {logs.map(([type, line], index) => {
+            return (
+              <span
+                key={index}
+                style={{
+                  color: type === "stderr" ? COLOR_STDERR : COLOR_STDOUT
+                }}
+              >
+                {line}
+              </span>
+            );
+          })}
         </pre>
       );
     }

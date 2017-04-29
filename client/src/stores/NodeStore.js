@@ -76,7 +76,7 @@ class NodeStore {
         fetch(`/api/services/${serviceId}/logs`)
           .then(response => {
             if (response.ok) {
-              return response.text();
+              return response.json();
             } else {
               throw response.statusText;
             }

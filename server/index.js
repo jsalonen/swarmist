@@ -74,6 +74,24 @@ app.get("/api/services/:id/logs", (req, res) => {
     function getServiceLogs(service, callback) {
       var self = service;
 
+      function demux(buffer) {
+        const items = [];
+        let i = 0;
+
+        while (i < buffer.length) {
+          const type = buffer.readUInt8(i);
+          i += 4;
+          const payloadSize = buffer.readUInt32BE(i);
+          i += 4;
+          const payload = buffer.slice(i, i + payloadSize).toString();
+          i += payloadSize;
+
+          items.push([type === 2 ? "stderr" : "stdout", payload]);
+        }
+
+        return items;
+      }
+
       var optsf = {
         path: "/services/" + service.id + "/logs?",
         method: "GET",
@@ -93,7 +111,10 @@ app.get("/api/services/:id/logs", (req, res) => {
       };
 
       service.modem.dial(optsf, function(err, data) {
-        callback(err, data);
+        const buffer = new Buffer(data);
+        const items = demux(buffer);
+
+        callback(err, items);
       });
     }
 
@@ -101,26 +122,7 @@ app.get("/api/services/:id/logs", (req, res) => {
       if (err) {
         return res.status(500).send(err);
       } else {
-        // Replace SOH control characters (0x01) with newlines
-        const nlData = data.replace(/\x01/g, "\n");
         return res.status(200).send(data);
-        /*
-
-        for(let i = 0; i < data.length - 1; ++i) {
-          if(data.charCodeAt(i) === 2) {
-            const header = data.substring(i, i+8);
-            const headerCodes = [];
-            for(let j = 0; j < header.length; j++) {
-              const code = header.charCodeAt(j);
-              headerCodes.push(code);
-            }
-            console.log('header=', headerCodes);
-          }
-        }
-
-        const nlData = data.replace(/[\x00\x01\x02]/g, "\n");
-        return res.status(200).send(data);//data);
-        */
       }
     });
   }

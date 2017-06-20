@@ -69,60 +69,46 @@ app.get("/api/services/:id/logs", (req, res) => {
   if (!id) {
     return res.status(400);
   } else {
-    let service = docker.getService(id);
+    const service = docker.getService(id);
+    const opts = {
+      stdout: 1,
+      stderr: 1,
+      follow: 1
+      //tail: 25
+      //timestamps: 1
+      //since: [UNIX timestamp]
+    };
 
-    function getServiceLogs(service, callback) {
-      var self = service;
+    function demux(buffer) {
+      const items = [];
+      let i = 0;
 
-      function demux(buffer) {
-        const items = [];
-        let i = 0;
+      while (i < buffer.length) {
+        const type = buffer.readUInt8(i);
+        i += 4;
+        const payloadSize = buffer.readUInt32BE(i);
+        i += 4;
+        const payload = buffer.slice(i, i + payloadSize).toString();
+        i += payloadSize;
 
-        while (i < buffer.length) {
-          const type = buffer.readUInt8(i);
-          i += 4;
-          const payloadSize = buffer.readUInt32BE(i);
-          i += 4;
-          const payload = buffer.slice(i, i + payloadSize).toString();
-          i += payloadSize;
-
-          items.push([type === 2 ? "stderr" : "stdout", payload]);
-        }
-
-        return items;
+        items.push([type === 2 ? "stderr" : "stdout", payload]);
       }
 
-      var optsf = {
-        path: "/services/" + service.id + "/logs?",
-        method: "GET",
-        statusCodes: {
-          200: true,
-          404: "no such service",
-          500: "server error"
-        },
-        options: {
-          stdout: 1,
-          stderr: 1,
-          follow: 0
-          //tail: 25
-          //timestamps: 1
-          //since: [UNIX timestamp]
-        }
-      };
-
-      service.modem.dial(optsf, function(err, data) {
-        const buffer = new Buffer(data);
-        const items = demux(buffer);
-
-        callback(err, items);
-      });
+      return items;
     }
 
-    getServiceLogs(service, (err, data) => {
+    service.logs(opts, (err, stream) => {
       if (err) {
         return res.status(500).send(err);
       } else {
-        return res.status(200).send(data);
+        var chunks = [];
+        stream.on("data", function(chunk) {
+          chunks.push(chunk);
+        });
+        stream.on("end", function() {
+          var buffer = Buffer.concat(chunks);
+          return res.status(200).send(demux(buffer));
+        });
       }
     });
   }

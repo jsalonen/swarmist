@@ -21,14 +21,14 @@
   },
   "license": "ISC",
   "dependencies": {
-    "dockerode": "^2.3.1",
+    "dockerode": "^2.5.0",
     "dockerode-options": "^0.2.1",
     "express": "^4.14.0"
   },
   "devDependencies": {
     "foreman": "^2.0.0",
     "husky": "^0.13.3",
-    "lint-staged": "^3.4.0",
+    "lint-staged": "^4.0.0",
     "nodemon": "^1.11.0",
     "prettier": "^1.2.2"
   }

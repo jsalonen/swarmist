@@ -73,7 +73,7 @@ app.get("/api/services/:id/logs", (req, res) => {
     const opts = {
       stdout: 1,
       stderr: 1,
-      follow: 1
+      follow: 0
       //tail: 25
       //timestamps: 1
       //since: [UNIX timestamp]

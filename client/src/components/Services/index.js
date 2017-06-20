@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import Subheader from "material-ui/Subheader";
-import Chip from "material-ui/Chip";
-import { orange100 } from "material-ui/styles/colors";
 import {
   Table,
   TableBody,
@@ -11,8 +9,6 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
-import IdField from "../IdField";
-//import ServiceUpdateStatus from "../ServiceUpdateStatus";
 import ServiceReplicaStatus from "../ServiceReplicaStatus";
 
 const Services = inject("nodeStore")(
@@ -54,7 +50,7 @@ const Services = inject("nodeStore")(
                   </TableRow>
                 </TableHeader>
                 <TableBody displayRowCheckbox={false}>
-                  {nodeStore.services.map((service, index) => (
+                  {nodeStore.services.map((service, index) =>
                     <TableRow
                       key={
                         index
@@ -77,7 +73,7 @@ const Services = inject("nodeStore")(
                           })}
                       </TableRowColumn>
                       <TableRowColumn>
-                        {(service.Endpoint.Ports || []).map((port, index) => (
+                        {(service.Endpoint.Ports || []).map((port, index) =>
                           <div key={index} style={{ padding: "1px 0" }}>
                             {port.Protocol}
                             {" "}
@@ -85,7 +81,7 @@ const Services = inject("nodeStore")(
                             :
                             {port.TargetPort}
                           </div>
-                        ))}
+                        )}
                       </TableRowColumn>
                       <TableRowColumn>
                         {service.Spec.TaskTemplate.ContainerSpec.Image}
@@ -99,7 +95,7 @@ const Services = inject("nodeStore")(
                           running={service.ReplicasRunning}
                           desired={
                             service.Spec.Mode.Replicated &&
-                              service.Spec.Mode.Replicated.Replicas
+                            service.Spec.Mode.Replicated.Replicas
                           }
                         />
                       </TableRowColumn>
@@ -112,15 +108,10 @@ const Services = inject("nodeStore")(
                               {key} = {value}
                             </div>
                           );
-                          /*
-                            <Chip backgroundColor={orange100} key={key}>
-                              {value}
-                            </Chip>
-                            */
                         })}
                       </TableRowColumn>
                     </TableRow>
-                  ))}
+                  )}
                 </TableBody>
               </Table>
             </div>

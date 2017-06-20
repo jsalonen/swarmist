@@ -23,7 +23,6 @@ class LogWindow extends Component {
 
   render() {
     const { logs } = this.props;
-    console.log(logs);
 
     if (!logs) {
       return <div />;
@@ -32,14 +31,14 @@ class LogWindow extends Component {
         <pre style={styles} ref={pre => (this.preElem = pre)}>
           {logs.map(([type, line], index) => {
             return (
-              <span
+              <div
                 key={index}
                 style={{
                   color: type === "stderr" ? COLOR_STDERR : COLOR_STDOUT
                 }}
               >
                 {line}
-              </span>
+              </div>
             );
           })}
         </pre>

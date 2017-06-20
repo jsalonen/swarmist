@@ -73,9 +73,9 @@ app.get("/api/services/:id/logs", (req, res) => {
     const opts = {
       stdout: 1,
       stderr: 1,
-      follow: 0
-      //tail: 25
-      //timestamps: 1
+      follow: 0,
+      timestamps: 1,
+      tail: 100
       //since: [UNIX timestamp]
     };
 
@@ -97,6 +97,16 @@ app.get("/api/services/:id/logs", (req, res) => {
       return items;
     }
 
+    function orderByTimestamp(items) {
+      const itemsWithTimestamp = items.map(([type, payload]) => {
+        const [timestamp, logline] = payload.split(/ (.+)?/, 2);
+        return [type, logline, timestamp];
+      });
+      return itemsWithTimestamp.sort((a, b) => {
+        return a[2].localeCompare(b[2]);
+      });
+    }
+
     service.logs(opts, (err, stream) => {
       if (err) {
         return res.status(500).send(err);
@@ -107,7 +117,7 @@ app.get("/api/services/:id/logs", (req, res) => {
         });
         stream.on("end", function() {
           var buffer = Buffer.concat(chunks);
-          return res.status(200).send(demux(buffer));
+          return res.status(200).send(orderByTimestamp(demux(buffer)));
         });
       }
     });

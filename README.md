@@ -32,36 +32,14 @@ Start swarmist and connect to tunneled port:
       --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
       --publish 4000:4000 jsalonen/swarmist
 
-## Recipes
-
-### Setting up Load Balancing with Traefik
-
-Add Traefik as a service:
-
-	docker service create \
-		--name traefik \
-		--constraint=node.role==manager \
-		--publish 80:80 --publish 8080:8080 \
-		--mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-		traefik:v1.1.0-rc2 \
-		--docker \
-		--docker.swarmmode \
-		--docker.domain=local \
-		--docker.watch \
-		--web
-
-See also: ["Traefik Swarm Mode Guide"](https://github.com/containous/traefik/blob/v1.1/docs/user-guide/swarm-mode.md)
-
 ## TODO
 
 - [X] Check connection and show errors (docker not connected, not in swarm)
 - [X] Support for service logs (tracking https://github.com/docker/docker/issues/24812)
-- [X] Recipe for using with traefik (https://github.com/containous/traefik/blob/v1.1/docs/user-guide/swarm-mode.md)
-  - [X] Pending: https://github.com/containous/traefik/pull/602#issuecomment-251024211
 - [ ] Display Service Volume mounts
 - [ ] Display Service Contraints
 - [ ] Support for service stats (tracking https://github.com/docker/docker/issues/24597)
 - [ ] Support digest images / re-pull current image on update ((https://github.com/docker/docker/issues/24066)
-  - [ ] Docker 1.13 will include --force option (https://github.com/docker/docker/pull/27596)
+- [ ] Add support for forced service update using --force option (https://github.com/docker/docker/pull/27596)
 
 Other pending swarm improvements: https://github.com/docker/docker/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3Aarea%2Fswarm%20label%3Akind%2Fenhancement

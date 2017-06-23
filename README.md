@@ -36,6 +36,7 @@ Start swarmist and connect to tunneled port:
 
 - [X] Check connection and show errors (docker not connected, not in swarm)
 - [X] Support for service logs (tracking https://github.com/docker/docker/issues/24812)
+- [ ] Display Service Events (https://github.com/docker/swarm/issues/1203)
 - [ ] Display Service Volume mounts
 - [ ] Display Service Contraints
 - [ ] Support for service stats (tracking https://github.com/docker/docker/issues/24597)

@@ -1,6 +1,6 @@
 [![](https://images.microbadger.com/badges/image/jsalonen/swarmist.svg)](https://microbadger.com/images/jsalonen/swarmist "Get your own image badge on microbadger.com")
 
-**Warning: This project is not actively maintained.** If you are looking for more up-to-date UI tools for managing your Docker Swarm cluster, consider using a more complete solution, like [https://swarmpit.io/](swarmpit.io) or [https://www.portainer.io/](https://www.portainer.io/).
+**Warning: This project is not actively maintained.** If you are looking for more up-to-date UI tools for managing your Docker Swarm cluster, consider using a more complete solution, like [swarmpit.io](https://swarmpit.io/) or [portainer.io](https://www.portainer.io/).
 
 # Swarmist
 

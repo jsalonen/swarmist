@@ -26,7 +26,7 @@
     "express": "^4.14.0"
   },
   "devDependencies": {
-    "foreman": "^2.0.0",
+    "foreman": "^3.0.1",
     "husky": "^0.13.3",
     "lint-staged": "^4.0.0",
     "nodemon": "^1.11.0",

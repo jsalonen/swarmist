@@ -1,12 +1,12 @@
 [![](https://images.microbadger.com/badges/image/jsalonen/swarmist.svg)](https://microbadger.com/images/jsalonen/swarmist "Get your own image badge on microbadger.com")
 
+**Warning: This project is not actively maintained.** If you are looking for more up-to-date UI tools for managing your Docker Swarm cluster, consider using a more complete solution, like [https://swarmpit.io/](swarmpit.io) or [https://www.portainer.io/](https://www.portainer.io/).
+
 # Swarmist
 
 Simple GUI for Docker Swarm Mode
 
 ![Screenshot](https://raw.githubusercontent.com/jsalonen/swarmist/master/screenshot.png)
-
-For something similar, check out [Portainer](http://portainer.io/).
 
 ## How to Run
 

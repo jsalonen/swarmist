@@ -3,6 +3,7 @@ const dockerOpts = require('dockerode-options');
 const options = dockerOpts(process.env.DOCKER_HOST);
 const docker = new Docker(options);
 const express = require('express');
+const stream = require('stream');
 const app = express();
 
 app.use('/', express.static('client/build'));
@@ -70,31 +71,13 @@ app.get('/api/services/:id/logs', (req, res) => {
   } else {
     const service = docker.getService(id);
     const opts = {
-      stdout: 1,
-      stderr: 1,
-      follow: 0,
-      timestamps: 1,
+      stdout: true,
+      stderr: true,
+      follow: true,
+      timestamps: true,
       tail: 100
       //since: [UNIX timestamp]
     };
-
-    function demux(buffer) {
-      const items = [];
-      let i = 0;
-
-      while (i < buffer.length) {
-        const type = buffer.readUInt8(i);
-        i += 4;
-        const payloadSize = buffer.readUInt32BE(i);
-        i += 4;
-        const payload = buffer.slice(i, i + payloadSize).toString();
-        i += payloadSize;
-
-        items.push([type === 2 ? 'stderr' : 'stdout', payload]);
-      }
-
-      return items;
-    }
 
     function orderByTimestamp(items) {
       const itemsWithTimestamp = items.map(([type, payload]) => {
@@ -106,18 +89,36 @@ app.get('/api/services/:id/logs', (req, res) => {
       });
     }
 
+    const stdoutStream = new stream.PassThrough();
+    const stderrStream = new stream.PassThrough();
+    let rows = []; 
+    stdoutStream.on('data', function(chunk) {
+      rows.push([
+        'stdout',
+        chunk.toString('utf8')
+      ]);
+    });
+    stderrStream.on('data', function(chunk) {
+      rows.push([
+        'stderr',
+        chunk.toString('utf8')
+      ]);
+    });
+
     service.logs(opts, (err, stream) => {
       if (err) {
         return res.status(500).send(err);
       } else {
-        var chunks = [];
-        stream.on('data', function(chunk) {
-          chunks.push(chunk);
-        });
+        service.modem.demuxStream(stream, stdoutStream, stderrStream);
         stream.on('end', function() {
-          var buffer = Buffer.concat(chunks);
-          return res.status(200).send(orderByTimestamp(demux(buffer)));
+          stdoutStream.end('!stop!');
+          stderrStream.end('!stop!');
+          res.status(200).send(orderByTimestamp(rows));
         });
+
+        setTimeout(function() {
+          stream.destroy();
+        }, 2000);
       }
     });
   }

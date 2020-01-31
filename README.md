@@ -47,11 +47,19 @@ Point your browser to:
 
       http://localhost:4000/
 
-To view Swarm statistics, ensure that Docker Swarm is running locally:
+In order to see swarm statistics, you need to connect your UI to running swarm cluster.
+
+## Testing Against Local Swarm Node
+
+Simplest way to develop is to test against a local swarm node.
+
+Ensure you have Docker installed locally:
+
+      docker --version
+
+Initiate swarm:
 
       docker swarm init
-
-## Developing Against Example Deployments
 
 Test replicated services by deploying Voting App Example:
 
@@ -60,9 +68,13 @@ Test replicated services by deploying Voting App Example:
       cd example-voting-app
       docker stack deploy --compose-file docker-stack.yml vote
 
-Test against a global service:
+Test global service by creating service in global mode (here: simple `top` monitor):
 
       docker service create --name top --mode global alpine top
+
+## Testing Against Swarm Cluster in AWS
+
+TODO
 
 ## TODO
 

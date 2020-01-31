@@ -1,6 +1,6 @@
 [![](https://images.microbadger.com/badges/image/jsalonen/swarmist.svg)](https://microbadger.com/images/jsalonen/swarmist "Get your own image badge on microbadger.com")
 
-**Warning: This project is not actively maintained.** If you are looking for more up-to-date UI tools for managing your Docker Swarm cluster, consider using a more complete solution, like [swarmpit.io](https://swarmpit.io/) or [portainer.io](https://www.portainer.io/).
+**Warning: This project is not actively maintained.** If you are looking for more up-to-date UI tools for managing your Docker Swarm cluster, consider using a more complete solution, like <a href="https://swarmpit.io" target="_blank">Swarmpit</a> or <a href="https://www.portainer.io/" target="_blank">Portainer</a>.
 
 # Swarmist
 
@@ -51,14 +51,18 @@ To view Swarm statistics, ensure that Docker Swarm is running locally:
 
       docker swarm init
 
-Test out Swarm by deploying Voting App Example.
+## Developing Against Example Deployments
+
+Test replicated services by deploying Voting App Example:
 
       cd ..
       git clone https://github.com/dockersamples/example-voting-app
       cd example-voting-app
       docker stack deploy --compose-file docker-stack.yml vote
 
-After deployment, you should now be able to see the app in Swarmist UI
+Test against a global service:
+
+      docker service create --name top --mode global alpine top
 
 ## TODO
 

@@ -62,7 +62,7 @@ const Services = inject('nodeStore')(
                         {service.Spec.TaskTemplate.ContainerSpec.Image}
                       </TableRowColumn>
                       <TableRowColumn
-                        style={{ width: '3rem', textAlign: 'center' }}
+                        style={{ width: '3rem' }}
                       >
                         <ServiceReplicaStatus
                           running={service.ReplicasRunning}
@@ -71,8 +71,6 @@ const Services = inject('nodeStore')(
                             service.Spec.Mode.Replicated.Replicas
                           }
                         />
-                        {/* Modes: Global, Replicated */}
-                        {service.Spec.Mode.Global && <div>Global</div>}
                       </TableRowColumn>
                       <TableRowColumn style={{ width: '5rem' }}>
                         {(service.Endpoint.Ports || []).map((port, index) => (

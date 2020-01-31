@@ -32,6 +32,34 @@ Start swarmist and connect to tunneled port:
       --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
       --publish 4000:4000 jsalonen/swarmist
 
+## How to Develop
+
+Install dependencies:
+
+      npm install
+      cd client && npm install && cd -
+
+Run development server:
+
+      npm start
+
+Point your browser to:
+
+      http://localhost:4000/
+
+To view Swarm statistics, ensure that Docker Swarm is running locally:
+
+      docker swarm init
+
+Test out Swarm by deploying Voting App Example.
+
+      cd ..
+      git clone https://github.com/dockersamples/example-voting-app
+      cd example-voting-app
+      docker stack deploy --compose-file docker-stack.yml vote
+
+After deployment, you should now be able to see the app in Swarmist UI
+
 ## TODO
 
 - [X] Check connection and show errors (docker not connected, not in swarm)

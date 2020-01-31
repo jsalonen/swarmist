@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { inject, observer } from "mobx-react";
-import Subheader from "material-ui/Subheader";
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
+import Subheader from 'material-ui/Subheader';
 import {
   Table,
   TableBody,
@@ -8,10 +8,10 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn
-} from "material-ui/Table";
-import ServiceReplicaStatus from "../ServiceReplicaStatus";
+} from 'material-ui/Table';
+import ServiceReplicaStatus from '../ServiceReplicaStatus';
 
-const Services = inject("nodeStore")(
+const Services = inject('nodeStore')(
   observer(
     class Services extends Component {
       onRowSelection(rows) {
@@ -40,57 +40,30 @@ const Services = inject("nodeStore")(
               >
                 <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                   <TableRow>
-                    <TableHeaderColumn>Name</TableHeaderColumn>
-                    <TableHeaderColumn>Networks</TableHeaderColumn>
-                    <TableHeaderColumn>Ports</TableHeaderColumn>
-                    <TableHeaderColumn>Image</TableHeaderColumn>
-                    <TableHeaderColumn>Mode</TableHeaderColumn>
-                    <TableHeaderColumn>Replicas</TableHeaderColumn>
+                    <TableHeaderColumn>Service</TableHeaderColumn>
+                    <TableHeaderColumn style={{ width: '3rem' }}>
+                      Replicas
+                    </TableHeaderColumn>
+                    <TableHeaderColumn style={{ width: '5rem' }}>
+                      Ports
+                    </TableHeaderColumn>
+                    <TableHeaderColumn style={{ width: '8rem' }}>
+                      Networks
+                    </TableHeaderColumn>
                     <TableHeaderColumn>Labels</TableHeaderColumn>
                   </TableRow>
                 </TableHeader>
                 <TableBody displayRowCheckbox={false}>
-                  {nodeStore.services.map((service, index) =>
-                    <TableRow
-                      key={
-                        index
-                      } /*selected={selectedServices.indexOf(service.ID) !== -1}*/
-                    >
-                      <TableRowColumn /*(<IdField value={service.ID} />)*/>
-                        {service.Spec.Name}
-                      </TableRowColumn>
+                  {nodeStore.services.map((service, index) => (
+                    <TableRow key={index}>
                       <TableRowColumn>
-                        {(service.Endpoint.VirtualIPs || [])
-                          .map((ip, index) => {
-                            const network = nodeStore.networks.find(
-                              network => network.Id === ip.NetworkID
-                            );
-                            return (
-                              <div key={index} style={{ padding: "1px 0" }}>
-                                {network.Name}
-                              </div>
-                            );
-                          })}
-                      </TableRowColumn>
-                      <TableRowColumn>
-                        {(service.Endpoint.Ports || []).map((port, index) =>
-                          <div key={index} style={{ padding: "1px 0" }}>
-                            {port.Protocol}
-                            {" "}
-                            {port.PublishedPort}
-                            :
-                            {port.TargetPort}
-                          </div>
-                        )}
-                      </TableRowColumn>
-                      <TableRowColumn>
+                        <b>{service.Spec.Name}</b>
+                        <br />
                         {service.Spec.TaskTemplate.ContainerSpec.Image}
                       </TableRowColumn>
-                      <TableRowColumn>
-                        {service.Spec.Mode.Global && <div>Global</div>}
-                        {service.Spec.Mode.Replicated && <div>Replicated</div>}
-                      </TableRowColumn>
-                      <TableRowColumn>
+                      <TableRowColumn
+                        style={{ width: '3rem', textAlign: 'center' }}
+                      >
                         <ServiceReplicaStatus
                           running={service.ReplicasRunning}
                           desired={
@@ -98,6 +71,33 @@ const Services = inject("nodeStore")(
                             service.Spec.Mode.Replicated.Replicas
                           }
                         />
+                        {/* Modes: Global, Replicated */}
+                        {service.Spec.Mode.Global && <div>Global</div>}
+                      </TableRowColumn>
+                      <TableRowColumn style={{ width: '5rem' }}>
+                        {(service.Endpoint.Ports || []).map((port, index) => (
+                          <div key={index} style={{ padding: '1px 0' }}>
+                            {port.PublishedPort}:{port.TargetPort}
+                            &nbsp;
+                            <span style={{ opacity: 0.5 }}>
+                              {port.Protocol}
+                            </span>
+                          </div>
+                        ))}
+                      </TableRowColumn>
+                      <TableRowColumn style={{ width: '8rem' }}>
+                        {(service.Endpoint.VirtualIPs || []).map(
+                          (ip, index) => {
+                            const network = nodeStore.networks.find(
+                              network => network.Id === ip.NetworkID
+                            );
+                            return (
+                              <div key={index} style={{ padding: '1px 0' }}>
+                                {network.Name}
+                              </div>
+                            );
+                          }
+                        )}
                       </TableRowColumn>
                       <TableRowColumn>
                         {Object.keys(service.Spec.Labels || {}).map(key => {
@@ -111,7 +111,7 @@ const Services = inject("nodeStore")(
                         })}
                       </TableRowColumn>
                     </TableRow>
-                  )}
+                  ))}
                 </TableBody>
               </Table>
             </div>

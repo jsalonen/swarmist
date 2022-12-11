@@ -23,7 +23,7 @@
   "dependencies": {
     "dockerode": "^3.0.2",
     "dockerode-options": "^0.2.1",
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   },
   "devDependencies": {
     "foreman": "^3.0.1",

@@ -21,7 +21,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "dockerode": "^3.0.2",
+    "dockerode": "^4.0.8",
     "dockerode-options": "^0.2.1",
     "express": "^4.17.1"
   },
